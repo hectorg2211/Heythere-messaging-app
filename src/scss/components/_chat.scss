@@ -1,0 +1,101 @@
+.chat {
+  display: flex;
+  flex-direction: column;
+  flex: 0.65;
+
+  &__header {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid $border-color;
+  }
+
+  &__headerInfo {
+    flex: 1;
+    padding-left: 20px;
+
+    h3 {
+      margin-bottom: 5px;
+      font-weight: 700;
+    }
+
+    p {
+      font-size: 0.8em;
+    }
+  }
+
+  &__body {
+    flex: 1;
+    // background-image if desired for the chat
+    padding: 30px;
+    overflow: scroll;
+
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+
+    // Chrome, Safari and Opera
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &__message {
+    position: relative;
+    font-size: 16px;
+    padding: 10px;
+    width: 70%;
+    border-radius: 10px;
+    background-color: $color-white;
+    margin-bottom: 25px;
+  }
+
+  &__sender {
+    margin-left: auto;
+    background: $color-primary-dark;
+    color: $color-white;
+  }
+
+  &__timeStamp {
+    display: block;
+    margin-top: 5px;
+    font-size: xx-small;
+  }
+
+  &__name {
+    position: absolute;
+    top: -15px;
+    font-weight: 800;
+    font-size: xx-small;
+    color: $color-black;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 62px;
+    border-top: 1px solid $border-color;
+
+    form {
+      flex: 1;
+      display: flex;
+    }
+
+    input {
+      flex: 1;
+      border-radius: 10px;
+      padding: 10px;
+      border: none;
+      outline: none;
+    }
+
+    button {
+      display: none;
+    }
+
+    .MuiSvgIcon-root {
+      padding: 10px;
+      color: $color-gray;
+    }
+  }
+}

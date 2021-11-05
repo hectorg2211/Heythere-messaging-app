@@ -1,0 +1,25 @@
+$fallback-background: #7f7fd5; /* fallback for old browsers */
+
+$webkit-background: -webkit-linear-gradient(
+  to right,
+  #7f7fd5,
+  #86a8e7,
+  #91eae4
+); /* Chrome 10-25, Safari 5.1-6 */
+
+$regular-background: linear-gradient(
+  to right,
+  #7f7fd5,
+  #86a8e7,
+  #91eae4
+); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+$color-primary: #7f7fd5;
+$color-primary-dark: #6060c9;
+
+$color-gray: gray;
+$color-white: #fff;
+$color-black: #000;
+
+$shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.5);
+$border-color: white;

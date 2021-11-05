@@ -1,0 +1,73 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  flex: 0.35;
+  border-right: 1px solid $border-color;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+
+    .MuiAvatar-root {
+      transition: all 0.2s;
+
+      &:hover {
+        transform: scale(1.3);
+        box-shadow: $shadow;
+      }
+    }
+  }
+
+  &__headerRight {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 10vw;
+
+    .MuiSvgIcon-root {
+      //   margin-right: 2vw;
+      font-size: 24px !important;
+    }
+  }
+
+  &__search {
+    display: flex;
+    align-items: center;
+    // background: $color-white;
+    height: 39px;
+    padding: 10px;
+  }
+
+  &__searchContainer {
+    display: flex;
+    align-items: center;
+    background: $color-white;
+    width: 100%;
+    height: 25px;
+    border-radius: 10px;
+    padding: 10px;
+
+    .MuiSvgIcon-root {
+      color: $color-gray;
+      padding: 10px;
+    }
+
+    input {
+      border: none;
+      outline: none;
+    }
+  }
+
+  &__chats {
+    flex: 1;
+    overflow: scroll;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+
+    // Chrome, Safari and Opera
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
