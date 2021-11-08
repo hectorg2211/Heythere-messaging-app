@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Link from "react-router-dom";
 
 // Components
 import UserChat from "./UserChat";
@@ -10,8 +11,11 @@ import MoreVertRoundedIcon from "@mui/icons-material/MoreVertRounded";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import { IconButton, Avatar } from "@mui/material";
 
+import { useStateValue } from "../StateProvider";
+
 const Sidebar = () => {
   const [rooms, setRooms] = useState([]);
+  const [{ user }, dispatch] = useStateValue();
 
   useEffect(() => {
     // TODO: Read rooms collection and set the rooms array
@@ -20,7 +24,7 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="sidebar__header">
-        <Avatar src="./assets/Hector.jpg"></Avatar>
+        <Avatar src={user?.photoURL}></Avatar>
         <div className="sidebar__headerRight">
           <IconButton>
             <DonutLargeRoundedIcon />
@@ -37,10 +41,13 @@ const Sidebar = () => {
         <div className="sidebar__searchContainer">
           <SearchRoundedIcon />
           <input type="text" placeholder="Search or start a new chat..." />
+          {/* TODO: Add new room functionality */}
         </div>
       </div>
       <div className="sidebar__chats">
-        {/* TODO: Map through Rooms in database */}
+        {/* TODO: Map through Rooms in database  */}
+        {/* TODO: Each room should be in a link to change the chat with a :roomid - */}
+        {/* TODO: Get last message for each room */}
         <UserChat />
         <UserChat />
         <UserChat />

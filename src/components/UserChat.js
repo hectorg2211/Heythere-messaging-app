@@ -1,6 +1,7 @@
 import React from "react";
 import { Avatar } from "@mui/material";
 
+// TODO: Add props with room name and last message in the room
 const UserChat = () => {
   return (
     <div className="userChat">

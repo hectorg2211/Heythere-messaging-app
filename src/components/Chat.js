@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 // Material UI icons
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
@@ -10,10 +11,24 @@ import { IconButton, Avatar } from "@mui/material";
 
 import axios from "../axios";
 import moment from "moment";
-import SelectInput from "@mui/material/Select/SelectInput";
 
-function Chat({ messages }) {
+import { useStateValue } from "../StateProvider";
+
+function Chat({ dummyMessages }) {
   const [myMessage, setMyMessage] = useState("");
+  const [messages, setMessages] = useState([]);
+  const [roomName, setRoomName] = useState("");
+  const [{ user }, dispatch] = useStateValue();
+  const { roomId } = useParams();
+
+  useEffect(() => {
+    if (roomId) {
+      /* TODO: Fetch the room*/
+      /* TODO: Set the room name */
+      /* TODO: Fetch the messages bassed on the rooms id */
+      /* TODO: Order messages by timestamp */
+    }
+  }, [roomId]);
 
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -22,6 +37,7 @@ function Chat({ messages }) {
       name: "Héctor García",
       timestamp: moment().subtract(0, "days").calendar(),
       received: false,
+      // TODO: add roomID:
     });
 
     setMyMessage("");
@@ -51,11 +67,13 @@ function Chat({ messages }) {
       </div>
 
       <div className="chat__body">
-        {messages.map((message, i) => {
+        {dummyMessages.map((message, i) => {
           return (
             <p
               key={i}
-              className={`chat__message ${!message.received && "chat__sender"}`}
+              className={`chat__message ${
+                message.name === user.displayName && "chat__sender"
+              }`}
             >
               <span className="chat__name">{message.name}</span>
               {message.message}

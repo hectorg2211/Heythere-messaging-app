@@ -1,0 +1,33 @@
+.login {
+  //   background: $color-white;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  overflow: hidden;
+
+  img {
+    object-fit: contain;
+    height: 150px;
+    margin-bottom: 40px;
+  }
+
+  &__container {
+    width: clamp(40%, 500px, 80%);
+    height: 320px;
+    padding: 50px;
+    text-align: center;
+    background-color: $color-white;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  &__text {
+    background: $regular-background;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  button {
+    margin-top: 50px;
+  }
+}
