@@ -1,14 +1,13 @@
 import React from "react";
 import { Avatar } from "@mui/material";
 
-// TODO: Add props with room name and last message in the room
-const UserChat = () => {
+const UserChat = ({ roomName, lastMessage }) => {
   return (
     <div className="userChat">
       <Avatar />
       <div className="userChat__info">
-        <h2>Room name</h2>
-        <p>Last message sent</p>
+        <h2>{roomName}</h2>
+        <p>{lastMessage}</p>
       </div>
     </div>
   );

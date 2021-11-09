@@ -12,13 +12,13 @@ const firebaseConfig = {
   measurementId: "G-JH95LXCRRY",
 };
 
-const firebaseApp = firebase.initializeApp(firebaseConfig);
+const app = firebase.initializeApp(firebaseConfig);
 
 // Access Firestore instance
 const auth = firebase.auth();
 const provider = new firebase.auth.GoogleAuthProvider();
 
-export { auth, provider };
+export { app, auth, provider };
 
 // Authentication
 // Hosting

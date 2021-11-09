@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import Pusher from "pusher-js";
 
 // Material UI icons
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
@@ -14,30 +15,61 @@ import moment from "moment";
 
 import { useStateValue } from "../StateProvider";
 
-function Chat({ dummyMessages }) {
+function Chat() {
   const [myMessage, setMyMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [roomName, setRoomName] = useState("");
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user }] = useStateValue();
   const { roomId } = useParams();
+  const chatWindow = document.querySelector(".chat__body");
+
+  // TODO: Prevent empty messages
+  useEffect(() => {
+    /* Real time functionality for messages */
+    var pusher = new Pusher("25be7e5f9273fd3f4de3", {
+      cluster: "us2",
+    });
+
+    var channel = pusher.subscribe("rooms");
+    channel.bind("updated", (updatedData) => {
+      const newMessage = updatedData.name.updatedFields?.messages.at(-1);
+      setMessages([...messages, newMessage]);
+    });
+
+    console.log(chatWindow?.scrollHeight);
+    chatWindow?.scroll({
+      top: chatWindow?.scrollHeight + 60,
+      left: 0,
+      behavior: "smooth",
+    });
+
+    return () => {
+      channel.unbind_all();
+      channel.unsubscribe();
+    };
+  }, [messages]);
 
   useEffect(() => {
     if (roomId) {
-      /* TODO: Fetch the room*/
-      /* TODO: Set the room name */
-      /* TODO: Fetch the messages bassed on the rooms id */
-      /* TODO: Order messages by timestamp */
+      axios.get(`/api/v1/rooms/${roomId}`).then((response) => {
+        const { data: room } = response.data;
+        setRoomName(room.name);
+        setMessages(room.messages);
+      });
     }
   }, [roomId]);
 
   const sendMessage = async (e) => {
     e.preventDefault();
-    await axios.post("/api/v1/messages", {
+    await axios.post(`/api/v1/rooms/${roomId}`, {
       message: myMessage,
-      name: "Héctor García",
-      timestamp: moment().subtract(0, "days").calendar(),
+      name: user.displayName,
+      timestamp: new Date(),
       received: false,
-      // TODO: add roomID:
+    });
+
+    await axios.patch(`/api/v1/rooms/${roomId}`, {
+      lastMessage: myMessage,
     });
 
     setMyMessage("");
@@ -49,8 +81,8 @@ function Chat({ dummyMessages }) {
         <Avatar />
 
         <div className="chat__headerInfo">
-          <h3>Room name</h3>
-          <p>Last seen at...</p>
+          <h3>{roomName}</h3>
+          <p>Last seen at 2:30 pm</p>
         </div>
 
         <div className="chat__headerRight">
@@ -67,7 +99,7 @@ function Chat({ dummyMessages }) {
       </div>
 
       <div className="chat__body">
-        {dummyMessages.map((message, i) => {
+        {messages.map((message, i) => {
           return (
             <p
               key={i}
@@ -77,7 +109,9 @@ function Chat({ dummyMessages }) {
             >
               <span className="chat__name">{message.name}</span>
               {message.message}
-              <span className="chat__timeStamp">{message.timestamp}</span>
+              <span className="chat__timeStamp">
+                {moment(message.timestamp).fromNow()}
+              </span>
             </p>
           );
         })}
@@ -85,14 +119,16 @@ function Chat({ dummyMessages }) {
 
       <div className="chat__footer">
         <MoodIcon />
-        <form action="" onSubmit={sendMessage}>
+        <form action="">
           <input
             type="text"
             placeholder="Type a message..."
             value={myMessage}
             onChange={(e) => setMyMessage(e.target.value)}
           />
-          <button type="submit">Send a message</button>
+          <button type="submit" onClick={sendMessage}>
+            Send a message
+          </button>
         </form>
         <MicNoneIcon />
       </div>

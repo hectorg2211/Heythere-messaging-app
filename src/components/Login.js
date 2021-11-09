@@ -1,25 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "@mui/material/Button";
-import { auth, provider } from "../firebase";
 import { useStateValue } from "../StateProvider";
 import { actionTypes } from "../reducer";
+import { signInWithPopup, onAuthStateChanged } from "firebase/auth";
+import { auth, provider } from "../firebase";
 
 const Login = () => {
-  const [state, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
 
-  const signIn = () => {
-    auth
-      .signInWithPopup(provider)
-      .then((result) => {
-        dispatch({
-          type: actionTypes.SET_USER,
-          user: result.user,
-        });
-      })
-      .catch((error) => {
-        alert(error.message);
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      dispatch({
+        type: actionTypes.SET_USER,
+        user,
       });
-  };
+    });
+  }, [dispatch]);
 
   return (
     <div className="login">
@@ -29,7 +25,11 @@ const Login = () => {
           <h1>Sign in to HeyThere</h1>
         </div>
 
-        <Button type="submit" variant="outlined" onClick={signIn}>
+        <Button
+          type="submit"
+          variant="outlined"
+          onClick={() => signInWithPopup(auth, provider)}
+        >
           Sign in with Google
         </Button>
       </div>
