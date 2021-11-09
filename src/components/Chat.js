@@ -47,7 +47,7 @@ function Chat() {
       channel.unbind_all();
       channel.unsubscribe();
     };
-  }, [messages]);
+  }, [messages, chatWindow]);
 
   useEffect(() => {
     if (roomId) {
