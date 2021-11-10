@@ -4,6 +4,10 @@
   flex: 0.35;
   border-right: 1px solid $border-color;
 
+  @media screen and (max-width: 800px) {
+    display: none;
+  }
+
   &__header {
     display: flex;
     justify-content: space-between;

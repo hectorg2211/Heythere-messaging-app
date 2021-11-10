@@ -3,6 +3,10 @@
   flex-direction: column;
   flex: 0.65;
 
+  @media screen and (max-width: 800px) {
+    flex: 1;
+  }
+
   &__header {
     padding: 20px;
     display: flex;

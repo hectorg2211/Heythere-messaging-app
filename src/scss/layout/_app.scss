@@ -13,5 +13,11 @@
     width: 90vw;
     box-shadow: $shadow;
     border-radius: 10px;
+
+    @media screen and (max-width: 800px) {
+      height: 100vh;
+      width: 100vw;
+      border-radius: 0px;
+    }
   }
 }
