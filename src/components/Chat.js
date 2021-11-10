@@ -32,6 +32,7 @@ function Chat() {
 
     var channel = pusher.subscribe("rooms");
     channel.bind("updated", (updatedData) => {
+      if (!updatedData.name.updatedFields?.messages) return;
       const newMessage = updatedData.name.updatedFields?.messages.at(-1);
       setMessages([...messages, newMessage]);
     });
