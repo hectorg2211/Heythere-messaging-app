@@ -69,6 +69,7 @@ Some extra functionality:
 ### Front End Built With
 
 - [React](https://es.reactjs.org/)
+- [React router](https://reactrouter.com/)
 - [Pusher](https://pusher.com/)
 - [SASS](https://sass-lang.com/)
 - [HTML](https://developer.mozilla.org/es/docs/Web/HTML)
