@@ -54,7 +54,7 @@
 
 ## About The Project
 
-Fully functional messaging app with realtime functionality and google authentication. The app allows the user to sign in using their google account, this allows their messages to display their name and their own image inside the application. Rooms can be accessed to chat with other users, Pusher was used for realtime functionality and updated the displayed messages on screen each time a new message was added. The axios library was used to make requests to the REST API that was built with express and mongoose, this allowed the creation of new messages as well as access to the room information. Material UI Icons where used to display aesthetic icons and the moment library allowed the application to display how long ago a message was displayed.
+Fully functional messaging app with realtime functionality and google authentication. The app allows the user to sign in using their google account, this allows their messages to display their name and their own image inside the application. Rooms can be accessed to chat with other users, Pusher was used for realtime functionality and updated the displayed messages on screen each time a new message was added. The axios library was used to make requests to the REST API that was built with express and mongoose, this allowed the creation of new messages as well as access to the room information. Material UI Icons where used to display aesthetic icons and the moment library allowed the application to display how long ago a message was displayed. The API for this app was deployed in heroku and the app itself in netlify.
 
 Some extra functionality:
 - Automatic scroll to bottom when a message is sent or received
